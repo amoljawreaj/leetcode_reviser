@@ -1,0 +1,459 @@
+/* ============================================================
+   style.css — LeetCode Reviser Popup
+   Aesthetic: Dark terminal / code-editor feel
+   ============================================================ */
+
+/* ── Variables ─────────────────────────────────────────────── */
+:root {
+  --bg:           #0d1117;
+  --bg-card:      #161b22;
+  --bg-card-2:    #1c2128;
+  --border:       #30363d;
+  --border-hover: #58a6ff;
+
+  --text:         #e6edf3;
+  --text-muted:   #7d8590;
+  --text-dim:     #484f58;
+
+  --accent:       #58a6ff;
+  --accent-glow:  rgba(88, 166, 255, 0.15);
+
+  --easy:         #3fb950;
+  --medium:       #e3b341;
+  --hard:         #f85149;
+
+  --leetcode:     #ffa116;
+  --hackerrank:   #2ec866;
+
+  --radius:       6px;
+  --radius-lg:    10px;
+
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Reset & Base ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  width: 360px;
+  min-height: 200px;
+  max-height: 580px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: 13px;
+  line-height: 1.5;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+body::-webkit-scrollbar { width: 4px; }
+body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* ── Header ─────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -1px;
+}
+
+.logo-bracket {
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.logo-text {
+  color: var(--text);
+  margin: 0 1px;
+}
+
+.app-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+
+.app-subtitle {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+/* ── Platform Filter Tabs ───────────────────────────────────── */
+.platform-filter {
+  display: flex;
+  gap: 6px;
+  padding: 10px 16px 0;
+}
+
+.filter-btn {
+  flex: 1;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-card-2);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.3px;
+}
+
+.filter-btn:hover {
+  color: var(--text);
+  border-color: var(--border-hover);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}
+
+/* ── Sections ───────────────────────────────────────────────── */
+.section {
+  padding: 14px 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+}
+
+.badge {
+  background: var(--accent);
+  color: #000;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 20px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.badge-muted {
+  background: var(--bg-card-2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0 16px;
+}
+
+/* ── Problem Cards ──────────────────────────────────────────── */
+.problem-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.problem-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 11px 13px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.problem-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 0 0 1px var(--accent-glow), 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+/* Difficulty badges */
+.diff-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.diff-easy   { background: rgba(63,185,80,0.15);  color: var(--easy);   border: 1px solid rgba(63,185,80,0.3); }
+.diff-medium { background: rgba(227,179,65,0.15); color: var(--medium); border: 1px solid rgba(227,179,65,0.3); }
+.diff-hard   { background: rgba(248,81,73,0.15);  color: var(--hard);   border: 1px solid rgba(248,81,73,0.3); }
+.diff-unknown { background: var(--bg-card-2); color: var(--text-muted); border: 1px solid var(--border); }
+
+/* Platform badges (LeetCode / HackerRank) */
+.platform-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.platform-lc {
+  background: rgba(255,161,22,0.15);
+  color: var(--leetcode);
+  border: 1px solid rgba(255,161,22,0.3);
+}
+
+.platform-hr {
+  background: rgba(46,200,102,0.15);
+  color: var(--hackerrank);
+  border: 1px solid rgba(46,200,102,0.3);
+}
+
+/* Progress pill */
+.progress {
+  font-size: 10px;
+  color: var(--text-muted);
+  background: var(--bg-card-2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1px 8px;
+  margin-left: auto;
+}
+
+.progress.done {
+  color: var(--easy);
+  border-color: rgba(63,185,80,0.3);
+  background: rgba(63,185,80,0.08);
+}
+
+/* Card title */
+.card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.4;
+}
+
+/* Meta row */
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.solved-date, .next-date {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.next-date {
+  color: var(--accent);
+  margin-left: auto;
+}
+
+.done-text {
+  color: var(--easy) !important;
+}
+
+/* Action buttons */
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-revise, .btn-open {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.3px;
+}
+
+.btn-revise {
+  background: var(--accent);
+  color: #000;
+}
+
+.btn-revise:hover {
+  background: #79b8ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(88,166,255,0.35);
+}
+
+.btn-open {
+  background: var(--bg-card-2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.btn-open:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
+/* ── Empty States ───────────────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 20px 16px;
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.empty-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.empty-msg {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.hidden { display: none !important; }
+
+/* ── Modal ──────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+  animation: modal-in 0.2s ease;
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.92) translateY(8px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+.modal-question {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.modal-problem-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.recall-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.recall-btn {
+  width: 100%;
+  padding: 9px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.3px;
+}
+
+.recall-btn.easy {
+  background: rgba(63,185,80,0.12);
+  color: var(--easy);
+  border-color: rgba(63,185,80,0.3);
+}
+.recall-btn.easy:hover {
+  background: rgba(63,185,80,0.22);
+  transform: translateY(-1px);
+}
+
+.recall-btn.medium {
+  background: rgba(227,179,65,0.12);
+  color: var(--medium);
+  border-color: rgba(227,179,65,0.3);
+}
+.recall-btn.medium:hover {
+  background: rgba(227,179,65,0.22);
+  transform: translateY(-1px);
+}
+
+.recall-btn.hard {
+  background: rgba(248,81,73,0.12);
+  color: var(--hard);
+  border-color: rgba(248,81,73,0.3);
+}
+.recall-btn.hard:hover {
+  background: rgba(248,81,73,0.22);
+  transform: translateY(-1px);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 11px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  text-decoration: underline;
+  padding: 4px;
+}
+
+.modal-close:hover { color: var(--text); }

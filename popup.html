@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Reviser</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="header">
+    <div class="header-logo">
+      <span class="logo-bracket">{</span>
+      <span class="logo-text">CR</span>
+      <span class="logo-bracket">}</span>
+    </div>
+    <div class="header-info">
+      <h1 class="app-title">Code Reviser</h1>
+      <p class="app-subtitle">Spaced Repetition Engine</p>
+    </div>
+  </header>
+
+  <!-- ── Platform Filter ── -->
+  <div class="platform-filter" id="platform-filter">
+    <button class="filter-btn active" data-platform="all">All</button>
+    <button class="filter-btn" data-platform="LeetCode">LeetCode</button>
+    <button class="filter-btn" data-platform="HackerRank">HackerRank</button>
+  </div>
+
+  <!-- ── Today's Queue ── -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Due Today</h2>
+      <span class="badge" id="due-count">0</span>
+    </div>
+
+    <!-- Problems to revise today -->
+    <div id="due-list" class="problem-list">
+      <!-- Populated by popup.js -->
+    </div>
+
+    <!-- Empty state -->
+    <div id="due-empty" class="empty-state hidden">
+      <div class="empty-icon">✓</div>
+      <p class="empty-msg">All clear! No revisions due today.</p>
+    </div>
+  </section>
+
+  <!-- ── Divider ── -->
+  <div class="divider"></div>
+
+  <!-- ── All Saved Problems ── -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">All Problems</h2>
+      <span class="badge badge-muted" id="total-count">0</span>
+    </div>
+
+    <div id="all-list" class="problem-list">
+      <!-- Populated by popup.js -->
+    </div>
+
+    <div id="all-empty" class="empty-state hidden">
+      <div class="empty-icon">📭</div>
+      <p class="empty-msg">No problems saved yet.<br/>Solve one on LeetCode or HackerRank!</p>
+    </div>
+  </section>
+
+  <!-- ── Recall Modal ── -->
+  <div id="recall-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <p class="modal-question">How well did you recall this?</p>
+      <p class="modal-problem-title" id="modal-problem-title"></p>
+
+      <div class="recall-buttons">
+        <button class="recall-btn easy"   data-rating="easy">😄 Easy</button>
+        <button class="recall-btn medium" data-rating="medium">😐 Medium</button>
+        <button class="recall-btn hard"   data-rating="hard">😓 Hard — Reset</button>
+      </div>
+
+      <button class="modal-close" id="modal-cancel">Cancel</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

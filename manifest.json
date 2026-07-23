@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "Code Reviser — LeetCode & HackerRank",
+  "version": "2.0.0",
+  "description": "Spaced repetition for LeetCode and HackerRank problems — revise at Day 3, 7, 14, 30.",
+
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+
+  "host_permissions": [
+    "https://leetcode.com/*",
+    "https://www.hackerrank.com/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://leetcode.com/problems/*"],
+      "js": ["content-leetcode.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.hackerrank.com/challenges/*",
+        "https://www.hackerrank.com/contests/*/challenges/*"
+      ],
+      "js": ["content-hackerrank.js"],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
